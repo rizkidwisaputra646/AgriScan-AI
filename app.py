@@ -9,7 +9,7 @@ from PIL import Image
 st.set_page_config(
     page_title="Smart Farming AI",
     page_icon="🌱",
-    layout="wide", # Menggunakan layout wide agar lebih leluasa
+    layout="wide", 
     initial_sidebar_state="expanded"
 )
 
@@ -120,13 +120,16 @@ with st.sidebar:
     st.caption("© 2026 Smart Farming v2.0")
 
 # =========================
-# LOAD MODEL
+# LOAD MODEL (TFLITE)
 # =========================
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("best_model.keras")
+    # Pastikan file model.tflite sudah diupload ke GitHub
+    interpreter = tf.lite.Interpreter(model_path="model.tflite")
+    interpreter.allocate_tensors()
+    return interpreter
 
-model = load_model()
+interpreter = load_model()
 
 # =========================
 # FORMAT NAMA KELAS
@@ -169,7 +172,7 @@ disease_info = {
 # =========================
 st.markdown("""
 <div class="main-header">
-    <h1>🌱 AgriScan AI</h1>
+    <h1>🌱 Smart Farming AI Analyzer</h1>
     <p style='color: #6b7280; font-size: 18px;'>Unggah foto daun tanaman Anda dan biarkan AI mendiagnosis kesehatannya dalam hitungan detik.</p>
 </div>
 """, unsafe_allow_html=True)
@@ -184,27 +187,33 @@ uploaded_file = st.file_uploader(
 st.markdown("---")
 
 # =========================
-# PREDIKSI & HASIL
+# PREDIKSI & HASIL (TFLITE)
 # =========================
 if uploaded_file is not None:
-    # Menggunakan kolom agar layout rapi (Kiri: Gambar, Kanan: Hasil)
     col_img, col_result = st.columns([1, 1.2], gap="large")
     
-    # Buka gambar
     image = Image.open(uploaded_file).convert("RGB")
     
     with col_img:
         st.subheader("📷 Foto Tanaman")
-        # Efek bayangan pada gambar menggunakan CSS Streamlit native image
         st.image(image, use_container_width=True, clamp=True)
 
-    # Proses AI
+    # Persiapan Data Gambar
     img = image.resize((224, 224))
     img_array = np.array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
+    img_array = np.expand_dims(img_array, axis=0).astype(np.float32) # Penting untuk TFLite
     
     with st.spinner("🧠 AI sedang menganalisis sel daun..."):
-        prediction = model.predict(img_array, verbose=0)
+        # Setup TFLite Interpreter
+        input_details = interpreter.get_input_details()
+        output_details = interpreter.get_output_details()
+        
+        # Masukkan gambar ke model
+        interpreter.set_tensor(input_details[0]['index'], img_array)
+        interpreter.invoke()
+        
+        # Ambil hasil prediksi
+        prediction = interpreter.get_tensor(output_details[0]['index'])
     
     # Ekstrak hasil
     predicted_index = np.argmax(prediction)
@@ -217,7 +226,6 @@ if uploaded_file is not None:
     with col_result:
         st.subheader("🧬 Hasil Diagnosis")
         
-        # Konfigurasi gaya kartu berdasarkan status
         card_class = "card-healthy" if is_healthy else "card-disease"
         badge = (
             "<div class='status-badge badge-good'>✨ Tanaman Sehat</div>"
@@ -235,7 +243,6 @@ if uploaded_file is not None:
         </div>
         """, unsafe_allow_html=True)
         
-        # Section Rekomendasi (Menggunakan Expander & Info box)
         st.write("### 💡 Tindakan yang Disarankan")
         if predicted_class in disease_info:
             if is_healthy:
@@ -246,15 +253,13 @@ if uploaded_file is not None:
             st.info("Belum tersedia rekomendasi spesifik untuk kategori ini.", icon="ℹ️")
 
     # =========================
-    # ANALISIS MENDALAM (Bagian Bawah)
+    # ANALISIS MENDALAM
     # =========================
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.subheader("📊 Analisis Probabilitas Teratas")
     
-    # Ambil top 3
     top_indices = np.argsort(prediction[0])[-3:][::-1]
     
-    # Tampilkan dalam 3 kolom
     col_1, col_2, col_3 = st.columns(3)
     cols = [col_1, col_2, col_3]
     
@@ -266,5 +271,4 @@ if uploaded_file is not None:
             st.metric(label=f"Peringkat {i+1}", value=f"{nilai:.1f}%", delta=nama, delta_color="off")
             st.progress(nilai / 100.0)
 
-    # Toast notifikasi saat analisis selesai
     st.toast('Analisis gambar berhasil diselesaikan!', icon='🎉')
