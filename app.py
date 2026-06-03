@@ -172,7 +172,7 @@ disease_info = {
 # =========================
 st.markdown("""
 <div class="main-header">
-    <h1>🌱 Smart Farming AI Analyzer</h1>
+    <h1>🌱 AgriSmart-AI</h1>
     <p style='color: #6b7280; font-size: 18px;'>Unggah foto daun tanaman Anda dan biarkan AI mendiagnosis kesehatannya dalam hitungan detik.</p>
 </div>
 """, unsafe_allow_html=True)
