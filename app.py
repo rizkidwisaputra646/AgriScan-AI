@@ -196,7 +196,7 @@ if uploaded_file is not None:
     
     with col_img:
         st.subheader("📷 Foto Tanaman")
-        st.image(image, use_container_width=True)
+        st.image(image, use_column_width=True)
 
     # Persiapan Data Gambar
     img = image.resize((224, 224))
