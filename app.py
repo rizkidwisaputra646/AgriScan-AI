@@ -156,15 +156,26 @@ class_names = [
 ]
 
 disease_info = {
-    "Tomato_Late_blight": "Kurangi kelembapan lingkungan, buang daun yang terinfeksi, dan gunakan fungisida sesuai anjuran.",
-    "Tomato_Early_blight": "Buang daun yang terinfeksi dan lakukan rotasi tanaman secara berkala.",
-    "Tomato_Bacterial_spot": "Gunakan benih sehat dan lakukan penyemprotan bakterisida sesuai kebutuhan.",
-    "Tomato_healthy": "Tanaman dalam kondisi sangat prima. Pertahankan jadwal penyiraman dan pemupukan.",
-    "Potato___Late_blight": "Pantau kelembapan dan lakukan pengendalian penyakit secara dini dengan fungisida.",
-    "Potato___Early_blight": "Buang bagian yang terserang, pastikan drainase tanah baik, dan lakukan sanitasi lahan.",
+    # 🥔 KENTANG
     "Potato___healthy": "Tanaman dalam kondisi sehat dan bebas dari bercak daun.",
+    "Potato___Early_blight": "Buang bagian yang terserang, pastikan drainase tanah baik, dan lakukan sanitasi lahan.",
+    "Potato___Late_blight": "Pantau kelembapan dan lakukan pengendalian penyakit secara dini dengan fungisida.",
+    
+    # 🫑 PAPRIKA
     "Pepper__bell___healthy": "Tanaman paprika sehat. Lanjutkan perawatan rutin Anda.",
-    "Pepper__bell___Bacterial_spot": "Gunakan benih bebas penyakit, hindari penyiraman dari atas (overhead irrigation), dan sanitasi area tanam."
+    "Pepper__bell___Bacterial_spot": "Gunakan benih bebas penyakit, hindari penyiraman dari atas (overhead irrigation), dan sanitasi area tanam.",
+    
+    # 🍅 TOMAT
+    "Tomato_healthy": "Tanaman dalam kondisi sangat prima. Pertahankan jadwal penyiraman dan pemupukan.",
+    "Tomato_Early_blight": "Buang daun yang terinfeksi (biasanya di bagian bawah) dan lakukan rotasi tanaman secara berkala.",
+    "Tomato_Late_blight": "Kurangi kelembapan lingkungan, buang daun yang terinfeksi, dan gunakan fungisida sesuai anjuran.",
+    "Tomato_Bacterial_spot": "Gunakan benih sehat dan lakukan penyemprotan bakterisida (berbahan aktif tembaga) sesuai kebutuhan.",
+    "Tomato_Septoria_leaf_spot": "Buang daun yang berbercak di bagian bawah, hindari penyiraman dari atas, dan gunakan fungisida.",
+    "Tomato_Leaf_Mold": "Tingkatkan sirkulasi udara antar tanaman, kurangi kelembapan di dalam green house, dan pangkas daun tua.",
+    "Tomato_Spider_mites_Two_spotted_spider_mite": "Semprotkan minyak mimba (neem oil) atau akarisida. Hama ini menyukai cuaca kering, jadi pastikan tanaman terhidrasi.",
+    "Tomato__Target_Spot": "Berikan jarak tanam yang cukup agar udara bersirkulasi dengan baik dan gunakan fungisida yang tepat.",
+    "Tomato__Tomato_YellowLeaf__Curl_Virus": "Kendalikan hama kutu kebul (kutu putih) pembawa virus. Cabut dan buang tanaman yang terinfeksi parah agar tidak menular.",
+    "Tomato__Tomato_mosaic_virus": "Segera cabut dan hancurkan tanaman yang terinfeksi. Cuci bersih tangan dan alat tani karena virus ini menular lewat sentuhan fisik."
 }
 
 # =========================
