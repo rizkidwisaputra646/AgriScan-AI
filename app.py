@@ -7,7 +7,7 @@ from PIL import Image
 # KONFIGURASI HALAMAN
 # =========================
 st.set_page_config(
-    page_title="Smart Farming AI",
+    page_title="AgriScan-AI",
     page_icon="🌱",
     layout="wide", 
     initial_sidebar_state="expanded"
@@ -109,7 +109,7 @@ with st.sidebar:
     st.image("https://cdn-icons-png.flaticon.com/512/2913/2913584.png", width=80)
     st.title("Tentang AI Ini")
     st.info("""
-    **Smart Farming AI** adalah sistem berbasis *Deep Learning* yang dirancang untuk membantu petani mengidentifikasi penyakit pada daun tanaman secara instan.
+    **AgriSmart-AI** adalah sistem berbasis *Deep Learning* yang dirancang untuk membantu petani mengidentifikasi penyakit pada daun tanaman secara instan.
     """)
     st.markdown("---")
     st.markdown("### 📊 Statistik Model")
