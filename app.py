@@ -173,15 +173,17 @@ disease_info = {
 st.markdown("""
 <div class="main-header">
     <h1>🌱 AgriSmart-AI</h1>
-    <p style='color: #6b7280; font-size: 18px;'>Unggah foto daun tanaman Anda dan biarkan AI mendiagnosis kesehatannya dalam hitungan detik.</p>
+    <p style='color: #6b7280; font-size: 18px;'>Unggah foto <b>daun Tomat, Kentang, atau Paprika</b> dan biarkan AI mendiagnosis kesehatannya dalam hitungan detik.</p>
 </div>
 """, unsafe_allow_html=True)
 
 # =========================
 # UPLOAD FILE
 # =========================
+st.info("📌 **Panduan Unggah:** Pastikan foto yang Anda masukkan adalah gambar **daun tunggal** (fokus pada daun tanpa banyak *noise* latar belakang) dari tanaman **Tomat, Kentang, atau Paprika**.")
+
 uploaded_file = st.file_uploader(
-    "Seret & lepas foto daun di sini (JPG/PNG)",
+    "Seret & lepas foto daun (Tomat/Kentang/Paprika) di sini (JPG/PNG)",
     type=["jpg", "jpeg", "png"]
 )
 st.markdown("---")
